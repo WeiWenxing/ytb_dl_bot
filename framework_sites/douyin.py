@@ -6,6 +6,24 @@ import random
 from urllib import parse
 
 
+def video_parse(link):
+    api_url = "https://api.pearktrue.cn/api/video/api.php"
+    params = {'url': link}
+    response = requests.get(api_url, params=params)
+
+    if response.status_code == 200:
+        video_info = response.json()
+        if video_info.get('code') == 200:
+            return video_info.get('data', {}).get('url')
+        else:
+            print(f"Error: {video_info.get('msg')}")
+    else:
+        print(f"HTTP Error: {response.status_code}")
+
+    return None
+
+
+
 def douyin_parse(link):
     """
     抖音链接解析

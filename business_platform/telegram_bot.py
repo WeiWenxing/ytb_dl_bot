@@ -111,10 +111,13 @@ async def guonei(update: Update, context: ContextTypes.DEFAULT_TYPE):
     #     url_ori = urls[0]
         logging.info(url_ori)
         if 'douyin' in url_ori:
-            urls = douyin.douyin_parse(url_ori)
-            resolution = '720x1080'
-            for url in urls:
-                await update.message.reply_text(f'{resolution}\n{url}')
+            #urls = douyin.douyin_parse(url_ori)
+            #resolution = '720x1080'
+            #for url in urls:
+            #    await update.message.reply_text(f'{resolution}\n{url}')
+            v_url = douyin.video_parse(url_ori)
+            if v_url:
+                await update.message.reply_text(f'{v_url}')
         elif 'xiaohongshu' in url_ori or 'xhs' in url_ori:
             urls = xiaohongshu.xhs_parse(url_ori)
             resolution = '900x1200'
