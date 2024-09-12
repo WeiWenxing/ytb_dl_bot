@@ -107,25 +107,10 @@ async def guonei(update: Update, context: ContextTypes.DEFAULT_TYPE):
     match = url_regex.search(text)
     if match:
         url_ori = match.group()
-    # if len(urls) >= 1:
-    #     url_ori = urls[0]
         logging.info(url_ori)
-        if 'douyin' in url_ori:
-            #urls = douyin.douyin_parse(url_ori)
-            #resolution = '720x1080'
-            #for url in urls:
-            #    await update.message.reply_text(f'{resolution}\n{url}')
-            v_url = douyin.video_parse(url_ori)
-            if v_url:
-                await update.message.reply_text(f'{v_url}')
-        elif 'xiaohongshu' in url_ori or 'xhs' in url_ori:
-            urls = xiaohongshu.xhs_parse(url_ori)
-            resolution = '900x1200'
-            for url in urls:
-                await update.message.reply_text(f'{resolution}\n{url}')
-        else:
-            resolution, url = parse_url_by_ydl(url_ori, 0)
-            await update.message.reply_text(f'{resolution}\n{url}')
+        v_url = douyin.video_parse(url_ori)
+        if v_url:
+            await update.message.reply_text(f'{v_url}')
 
 
 async def run():
